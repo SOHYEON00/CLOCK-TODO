@@ -1,11 +1,47 @@
-h1 {
-	color: black;
-	transition: color 0.5s ease-in-out;
+main {
+	display: flex;
+	flex-direction: row;
+	width:100%;
+	height: 100%;
 }
 
-.btn {
-	cursor: pointer;
+container {
+	display: flex;
+	width: 50%;
+	flex-direction: column;
+	padding: 10px;
 }
-.clicked {
-	color: #0984e3;
+.item {
+	display: flex;
+    justify-content: center;
 }
+
+
+.js-form {
+	flex: 2;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: center;
+    
+}
+#formClock {
+	margin: 20px 0;
+}
+#imgSlide {
+	width: 40vw;
+	height: 50vh;
+	border: solid 1px red;
+	margin: 20px 0;
+}
+#nowTime {
+	flex: 1;
+}
+
+#listTodo {
+	margin: 20px 0;
+	width: 40vw;
+	height: 70vh;
+	border: solid 1px red;
+}
+
+

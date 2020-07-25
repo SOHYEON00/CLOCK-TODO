@@ -3,13 +3,31 @@
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="clock.css">
-	<title>clock</title>
+	<title>clock - todo</title>
 </head>
 
 <body>
-	<!-- <h1 id="title" class="btn">this works!</h1> -->
-	<div id="clock">00:00</div>
+	<main>
+		<container class="conClock">
+			<h2 class="title item"> THE TIME IN WHERE YOU ARE</h2>
+			<form class="item js-form" id="formClock">
+				<div class="item" id="imgSlide"></div>
+				<input class="item" id="inputPlace" placeholder="where are you?"></input>
+			</form>	
+			<h3 class="item" id="nowTime">SEL 00 : 00 : 00</h4>
+		</container>
+
+		<container class="conTodo">
+			<h2 class="title item"> WHAT DO YOU WANT TO DO?</h2>
+			<form class="item js-form">
+				<input id="inputTodos" class="item" placeholder="what to do?"></input>
+				<div class="item" id="listTodo"></div>
+			</form>
+		</container>
+	</main>
+
 	<script src="clock.js"></script>
+	<script type="todo.js"></script>
 </body>
 
 </html>
