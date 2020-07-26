@@ -33,9 +33,8 @@ container {
 	border: solid 1px red;
 	margin: 20px 0;
 }
-#nowTime {
-	flex: 1;
-}
+
+
 
 #listTodo {
 	margin: 20px 0;
@@ -44,4 +43,11 @@ container {
 	border: solid 1px red;
 }
 
+.showing {
+	display: flex;
+	flex: 1;
+}
 
+.notShowing {
+	display: none;
+}

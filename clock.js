@@ -1,65 +1,47 @@
-// // const CLICKED_CLASS = "clicked";
+const formClock = document.querySelector("#formClock");
+const inputPlace = formClock.querySelector("#inputPlace");
+const currentTime = document.querySelector("#nowTime");
+const greeting = formClock.querySelector(".greeting");
 
-// // const title = document.querySelector("#title");
-// // // console.dir(document); -> show funcs or objects with html
+function savePlace(place) {
+	localStorage.setItem("place",place);
+}
 
-// // function changeColor(event){
-// // 	// const hasClickedClass = title.classList.contains(CLICKED_CLASS);
+function getTime() {
+	const now = new Date();
+	const hours = now.getHours();
+	const mins = now.getMinutes();
+	const sec = now.getSeconds();
 
-// // 	// if(hasClickedClass) {
-// // 	// 	title.classList.remove(CLICKED_CLASS);
-// // 	// } else {
-// // 	// 	title.classList.add(CLICKED_CLASS);
-// // 	// }
-	
-// // 	title.classList.toggle(CLICKED_CLASS);
-// // }
-// // title.addEventListener("click", changeColor);
+	currentTime.classList.remove("notShowing");
+	currentTime.classList.add("showing");
 
-// const time = document.querySelector("#clock"),
-// 	form = document.querySelector(".js-input"),
-// 	input = form.querySelector("input"),
-// 	greeting = document.querySelector(".greeting");
+	currentTime.innerText = `${inputPlace.value} >> ${hours < 10 ? `0${hours}` : hours} : ${mins < 10 ? `0${mins}` : mins} : ${sec < 10 ? `0${sec}` : sec}`;
 
-// function greetFunc(name) {
-// 	greeting.innerText = `Hi, ${name}`;
-// 	greeting.classList.add("showing");
-// }
+}
 
-// function saveName(name) {
-// 	const key = "name";
-// 	localStorage.setItem(key, name);
-// 	greetFunc(name);
-// }w
+function getPlace(event) {
+	event.preventDefault();
+	const currentPlace = inputPlace.value;
 
-// function handleEvent(event) {
-// 	const currentValue = input.value;
-	
-// 	event.preventDefault();
-// 	form.classList.add("notShowing");
-// 	saveName(currentValue);
-// }
+	inputPlace.classList.add("notShowing");
+	greeting.innerText = `Hello, ${currentPlace}`;
+	greeting.classList.remove("notShowing");
 
-// function askName() {
-// 	form.addEventListener("submit", handleEvent);
-// }
+	if(currentPlace !== null){
+		setInterval(getTime, 1000);
+		savePlace(currentPlace);
+	}
+}
+function init() {
+	formClock.addEventListener("submit", getPlace);
+}
 
-// function getTime() {
-// 	const now = new Date();
-// 	const hours = now.getHours();
-// 	const minutes = now.getMinutes();
-// 	const sec = now.getSeconds();
 
-// 	time.innerHTML =  
-// 	`${hours < 10 ? `0${hours}` : hours} :
-// 	 ${minutes < 10 ? `0${minutes}` : minutes} :
-// 	 ${sec < 10 ? `0${sec}` : sec}`;
-// }
+init();
 
-// function init() {
-// 	getTime();
-// 	setInterval(getTime, 1000);	
-// 	askName();
-// }
 
-// init();
+
+
+
+
