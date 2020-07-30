@@ -51,3 +51,7 @@ container {
 .notShowing {
 	display: none;
 }
+
+ul {
+	list-style-type: none;
+}
