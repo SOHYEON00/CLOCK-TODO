@@ -15,7 +15,6 @@ container {
 	display: flex;
     justify-content: center;
 }
-
 .js-form {
 	flex: 1.5;
     flex-flow: column;
