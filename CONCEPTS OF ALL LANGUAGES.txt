@@ -38,3 +38,18 @@ history.go(0);
 이걸 통해서 자소서, 포폴
 
 1. 다 찾아서 경험 정리하기
+
+
+
+
+
+
+------------NOMAD 바닐라 2주 챌린지-----------------
+이벤트 핸들러
+ 
+const superEventHandler = function() {
+  window.addEventListener("resize", resizeHandler);
+  window.addEventListener("contextmenu", rightClickHandler);
+  title.addEventListener("mouseenter", mouseOnHandler);
+  title.addEventListener("mouseleave", mouseOverHandelr);
+};
