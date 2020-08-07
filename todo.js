@@ -3,20 +3,42 @@ const inputTodos = formTodo.querySelector("#inputTodos");
 const listTodo = formTodo.querySelector("ul");
 let arrTodoObj = [];
 
-
 const TODO_LS = "todo";
 
-function saveArrToLs() {
+function saveArrToLs(arrTodoObj) {
 	let arrJson = JSON.stringify(arrTodoObj);
 	localStorage.setItem(TODO_LS, arrJson);
 }
 
-function paintList(object) {
-	const li = document.createElement('li');
-	li.innerText = `${object.id}. ${object.text}`;
-	listTodo.appendChild(li);
+function delBtnHandler(button) 
+{
+	const clickedLI = button.path[1];
+	const clickedText = (clickedLI.innerText);
+
+	listTodo.removeChild(clickedLI);
+	console.log();
+	const clicekdID = arrTodoObj.findIndex(x => x.text === clickedText);
+	arrTodoObj.splice(clicekdID, 1);
+	//.slice와 .splice의 차이!!!!!!!
+	saveArrToLs(arrTodoObj);
 }
 
+function paintList(object) {
+	const li = document.createElement('li');
+	const delBtn = document.createElement('input');
+	delBtn.type = "button";
+
+	li.id = object.id;
+	delBtn.id = object.id;
+	delBtn.value = "X";
+	li.innerText = `${object.text}`;
+
+	listTodo.appendChild(li);
+	li.appendChild(delBtn);
+	delBtn.addEventListener("click", delBtnHandler, delBtn);
+}
+
+//target 사용법
 function clearInput(target) {
 	if(target.value !== null){
 		target.value = '';
@@ -36,8 +58,9 @@ function submitHandler(event) {
 
 	arrTodoObj.push(todoObj);
 	paintList(todoObj);
+	console.log(arrTodoObj);
 	clearInput(inputTodos);
-	saveArrToLs();
+	saveArrToLs(arrTodoObj); //새로 입력되는 투두 바로 ls에 추가
 }
 
 function init() {
@@ -49,10 +72,7 @@ function init() {
 		arrTodoObj = currentArr;
 
 		currentArr.forEach(function(element){
-			const li = document.createElement('li');
-			li.innerText = `${element.id}. ${element.text}`;
-			li.id = element.id;
-			listTodo.appendChild(li);
+			paintList(element);
 		});
 	}
 	formTodo.addEventListener("submit", submitHandler);
