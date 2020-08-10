@@ -1,43 +1,85 @@
-
+<!DOCTYPE html>
 <html>
-<head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href="clock.css">
-	<title>clock - todo</title>
-</head>
+  <head>
+    <title>Parcel Sandbox</title>
+    <meta charset="UTF-8" />
+  </head>
 
-<body>
-	<main>
-		<container class="conClock">
-			<h2 class="title item"> THE TIME IN WHERE YOU ARE</h2>
-
-			<form class="item js-form" id="formClock">
-				<div class="item" id="imgSlide"></div>
-				<input class="item" id="inputContinent" placeholder="Europe / Asia / America?"></input>
-				<input class="item" id="inputCity" placeholder="where is the city?"></input>
-				<input type="submit" value="search" id="submitBtn"/>
-			</form>
-
-			<h3 class="item greeting notShowing">Hello, london!</h3>
-			<div class="divClock notShowing"> 
-				<iframe src="" width="100%" height="115" frameborder="0" seamless></iframe>
-			</div>
-
-		</container>
-
-		<container class="conTodo">
-			<h2 class="title item"> WHAT DO YOU WANT TO DO?</h2>
-			<form class="item js-form">
-				<input id="inputTodos" class="item" placeholder="what to do?"></input>
-				<div class="item" id="listTodo">
-					<ul></ul>
-				</div>
-			</form>
-		</container>
-	</main>
-
-	<script src="clock.js"></script>
-	<script src="todo.js"></script>
-</body>
-
+  <body>
+    <h1>Tasks</h1>
+    <form class="js-form">
+      <input type="text" placeholder="Add task">
+    </form>
+    <h2 class="board" id="pending">Pending</h2>
+    <ul id="listPend"></ul>
+    <h2 class="board" id="finished">Finished</h2>
+    <ul id="listFin"></ul>
+    <script src="index.js"></script>
+  </body>
 </html>
+
+
+
+
+<!-- <!DOCTYPE html>
+<html>
+  <head>
+    <title>Parcel Sandbox</title>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <h1>Where are you from?</h1>
+    <select>
+      <option value="">--- Choose Your Country ---</option>
+      <option value="KOREA">Korea</option>
+      <option value="GREECE">Greece</option>
+      <option value="TURKEY">Turkey</option>
+      <option value="FINLAND">Finland</option>
+    </select>
+    <script src="hero.js"></script>
+  </body>
+</html>
+
+ -->
+
+<!-- <!DOCTYPE html>
+<html>
+  <head>
+    <title>Parcel Sandbox</title>
+    <meta charset="UTF-8" />
+  </head>
+
+  <body>
+    
+    <h1>Times until Christmas</h1>
+    <h3 id="time"></h3>
+    <script src="hero.js"></script>
+  </body>
+</html>
+ -->
+
+
+<!-- 
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>Our superheroes</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Faster+One" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+
+      <header>
+
+      </header>
+
+      <section>
+
+      </section>
+
+    <script src="hero.js"></script>
+  </body>
+</html> -->

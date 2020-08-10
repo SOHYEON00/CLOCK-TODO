@@ -1,0 +1,248 @@
+const boardPend = document.querySelector("#pending");
+const boardFin = document.querySelector("#finshed");
+const form = document.querySelector(".js-form");
+const input = form.querySelector("input");
+const listPend = document.querySelector("#listPend");
+const listFin = document.querySelector("#listFin");
+let arrPend = [];
+let arrFin = [];
+
+const PENDING = "Pending";
+const FINISHED = "Finished";
+
+
+function lsSetItem(text) {
+  //객체 생성
+  const newId = arrPend.length + 1;
+  const newTask = {
+    "id": newId,
+    "text": text
+  };
+  //생성된 객체 배열에 넣기
+  arrPend.push(newTask);
+
+  const strArrPend = JSON.stringify(arrPend);
+  const strArrFin = JSON.stringify(arrFin);
+  //배열로 setItem
+  localStorage.setItem(PENDING, strArrPend);
+  localStorage.setItem(FINISHED, strArrFin);
+}
+
+function paintList(text) {
+
+  const li = document.createElement("li");
+  const delBtn = document.createElement("input");
+  const btnToFin = document.createElement("input");
+  li.innerText = text;
+  li.id = arrPend.length + 1;
+  delBtn.type = "button"; 
+  delBtn.value = "X";
+  delBtn.id = li.id;
+  btnToFin.type = "button";
+  btnToFin.value = "▶";
+  btnToFin.id = li.id;
+
+  listPend.appendChild(li);
+  li.appendChild(delBtn);
+  li.appendChild(btnToFin);
+
+}
+
+function submitHandler(event) {
+  event.preventDefault();
+  const newText = input.value;
+  lsSetItem(newText);
+  paintList(newText);
+}
+
+// function printExist() {
+//   const existPend = localStorage.getItem(PENDING);
+//   const existFin = localStorage.getItem(FINISHED);
+
+//   // if(existPend === null || existFin === null) {
+//   //   return;
+//   // }
+//   console.log(existFin);
+//   arrPend = JSON.parse(existPend);
+//   arrFin = JSON.parse(existFin);
+  
+// }
+
+function init() {
+  // printExist();
+  form.addEventListener("submit", submitHandler);
+}
+
+init();
+
+
+
+/*
+1. 보드 생성
+2. 
+*/
+
+
+
+
+
+
+
+
+
+
+
+// const selection = document.querySelector("select");
+// const COUNTRY = "country";
+
+// function changeHandler(event) {
+//   const currentSel = event.target.value;
+//   localStorage.setItem(COUNTRY, currentSel);
+ 
+// }
+// function init() {
+//   selection.value = localStorage.getItem(COUNTRY);
+//   selection.addEventListener("change", changeHandler);
+// }
+
+// init();
+
+
+
+// //import "./styles.css";
+
+// // You're gonna need this
+// // -> the variable 'date' in this code, has current KST. so I didn't use the next variable which was declared by instructor.
+// //const NINE_HOURS_MILLISECONDS = 32400000;
+
+// const currentTime = document.querySelector("h3");
+// function calGap(xmas, date) {
+//   const gap = xmas.getTime() - date.getTime();
+
+//   let gapSec = Math.floor((gap / 1000) % 60);
+//   let gapMin = Math.floor((gap / (1000 * 60)) % 60);
+//   let gapHour = Math.floor((gap / (1000 * 60 * 60)) % 24);
+//   let gapDay = Math.floor(gap / (1000 * 60 * 60 * 24));
+
+//   currentTime.innerHTML = `${gapDay < 10 ? `0${gapDay}` : gapDay}d ${
+//     gapHour < 10 ? `0${gapHour}` : gapHour
+//   }h ${gapMin < 10 ? `0${gapMin}` : gapMin}m ${
+//     gapSec < 10 ? `0${gapSec}` : gapSec
+//   }s`;
+// }
+
+// function getTime() {
+//   // Don't delete this.
+//   const xmasDay = new Date("2020-12-24:00:00:00");
+//   const date = new Date();
+
+//   calGap(xmasDay, date);
+// }
+
+// function init() {
+//   setInterval(getTime, 1000);
+// }
+// init();
+
+
+
+
+
+// const body = document.querySelector("body");
+
+// function resizeHandler() {
+// 	let width = window.innerWidth;
+// 	if(width < 1000) {
+// 		body.style.backgroundColor = "red";
+// 	}
+// 	else if(width > 1400) {
+
+// 	}
+// 	else {
+
+// 	}
+// }
+
+// window.addEventListener("resize", resizeHandler);
+
+
+
+// const header = document.querySelector('header');
+// const section = document.querySelector('section');
+// let requestURL = 'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json';
+// let request = new XMLHttpRequest(); // XMLHttpRequest 초기화
+// // 전체 페이지의 새로고침없이도 URL 로부터 데이터를 받아올 수 있음.
+// // 즉, 웹 페이지가 사용자의 사용을 방해하지 않고 페이지의 일부만 업데이트해줌.
+
+// // (HTTP메소드, URL)
+// // HTTP메소드 : 네트워크 요청 시 사용
+// // URL : 요청을 보낼 곳 지정
+
+// request.open('GET', requestURL); 
+// request.responseType = 'json'; // XHR로 하여금 서버가 JSON 데이터 반환, 자바스크립트 객체로서 변환될 것이라는 걸 알게 하기 위해 사용.
+// request.send(); // 요청
+
+
+
+// request.onload = function() {
+//     const superHeroes = request.response;
+//     populateHeader(superHeroes);
+//     showHeroes(superHeroes);
+// }
+// // //서버 응답 wait, 처리 관련 섹션
+// // request.onload = function() {
+// // 	const superHeroes = request.response; //요청에 대한 응답 저장 -> 변수 superHeroes는 JSON데이터에 기반한 JS 객체 포함함
+// // 	populateHeader(superHeroes); //함수 호출해 객체 전달 (<header>를 적절한 데이터로 채움)
+// // 	showHeroes(superHeroes); // 팀의 각 히어로에 대한 정보카드 생성해 <section>에 넣음
+// // }//request 객체에 로드 이벤트가 발생할 경우에만 함수 실행
+
+// // //---------- JSON 데이터를 가져와 JS 객체로 변환 --------------------//
+
+
+// //헤더 조작
+// function populateHeader(jsonObj) {
+//       const myH1 = document.createElement('h1');
+//       myH1.textContent = jsonObj['squadName'];
+//       header.appendChild(myH1);
+
+//       const myPara = document.createElement('p');
+//       myPara.textContent = 'Hometown: ' + jsonObj['homeTown'] + ' // Formed: ' + jsonObj['formed'];
+//       header.appendChild(myPara);
+// }
+
+// //히어로 정보 카드 생성
+// function showHeroes(jsonObj) {
+// 	const heroes = jsonObj['members'];
+
+// 	for(let i = 0; i < heroes.length; i++) {
+// 		let myArticle = document.createElement('article');
+// 		let myH2 = document.createElement('h2');
+// 		let myPara1 = document.createElement('p');
+// 		let myPara2 = document.createElement('p');
+// 		let myPara3 = document.createElement('p');
+// 		let myList = document.createElement('ul');
+
+// 		myH2.textContent = heroes[i].name;
+// 		myPara1.textContent = 'Secret identity: ' + heroes[i].secretIdentity;
+// 		myPara2.textContent = 'Age: ' + heroes[i].age;
+// 		myPara3.textContent = 'Superpowers:';
+
+// 		let superPowers = heroes[i].powers;
+// 		for(let j = 0; j < superPowers.length; j++) {
+// 			let listItem = document.createElement('li');
+// 			listItem.textContent = superPowers[j];
+// 			myList.appendChild(listItem);
+// 		}
+// 		myArticle.appendChild(myH2);
+// 		myArticle.appendChild(myPara1);
+// 		myArticle.appendChild(myPara2);
+// 		myArticle.appendChild(myPara3);
+// 		myArticle.appendChild(myList);
+
+// 		section.appendChild(myArticle);
+// 	}
+// }
+
+// // parse(): JSON 문자열을 매개변수로서 수용하고, 일치하는 자바스크립트 객체로서 변환합니다.
+// // stringify(): 객체를 매개변수로서 수용하고, JSON 문자열 형태로 변환합니다. 
+
