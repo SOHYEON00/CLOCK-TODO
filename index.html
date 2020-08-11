@@ -7,13 +7,16 @@
 
   <body>
     <h1>Tasks</h1>
-    <form class="js-form">
+    <form id="formPend">
       <input type="text" placeholder="Add task">
+      <h2 class="board" id="pending">Pending</h2>
+      <ul id="listPend"></ul>
     </form>
-    <h2 class="board" id="pending">Pending</h2>
-    <ul id="listPend"></ul>
-    <h2 class="board" id="finished">Finished</h2>
-    <ul id="listFin"></ul>
+
+    <form id="formFin">
+      <h2 class="board" id="finished">Finished</h2>
+      <ul id="listFin"></ul>
+    </form>
     <script src="index.js"></script>
   </body>
 </html>
