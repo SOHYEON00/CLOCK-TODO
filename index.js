@@ -1,5 +1,3 @@
-const boardPend = document.querySelector("#pending");
-const boardFin = document.querySelector("#finshed");
 const formPend = document.querySelector("#formPend");
 const formFin = document.querySelector("#formFin");
 const input = formPend.querySelector("input");
@@ -48,7 +46,6 @@ function moveTo(event) {
   const movedBtn = event.target;
   const idOfBtn = parseInt(movedBtn.id); //1~
   const movedLi = movedBtn.parentNode;
-  const textObj = movedLi.innerText;
   const fromList = movedLi.parentNode;
 
 
@@ -138,7 +135,6 @@ function getArray() {
 }
 
 function init() {
-  console.log(arrPend);
   getArray();
   lsSetItem();
   formPend.addEventListener("submit", submitHandler);
