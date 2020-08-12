@@ -1,5 +1,9 @@
-.board {
-  
+p {
+  display: none;
+}
+
+.showing {
+  display: block;
 }
 
 /*/* || general styles 

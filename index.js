@@ -1,146 +1,209 @@
-const formPend = document.querySelector("#formPend");
-const formFin = document.querySelector("#formFin");
-const input = formPend.querySelector("input");
-const listPend = formPend.querySelector("#listPend");
-const listFin = formFin.querySelector("#listFin");
-let arrPend = [];
-let arrFin = [];
+// const form = document.querySelector("form"),
+ const     span = document.querySelector("#range"),
+      inputRange = document.querySelector("#rangeInput"),
+      inputNum = document.querySelector("#numberInput"),
+      playBtn = document.querySelector("#play"),
+      wroteSpan = document.querySelector("#wrote"),
+      machineSpan = document.querySelector("#machine"),
+      nowLine = document.querySelector("#now"),
+      resultLine = document.querySelector("#result");
+let answer;
+// 1. input range값 조절하기 = answer값 얻기
+// 2. 내가 생각한 답 입력하기.
+// 3. 버튼 누르면 현재 입력한 값이랑 answer값 비교해 결과 출력
+// 4. 입력한 값이 없으면 3번이 작동하지 않기.
+function checkCorrect(urAnswer) {
 
-const PENDING = "Pending";
-const FINISHED = "Finished";
-
-
-function lsSetItem() {
-
-  const strArrPend = JSON.stringify(arrPend);
-  const strArrFin = JSON.stringify(arrFin);
-  //배열로 setItem
-  localStorage.setItem(PENDING, strArrPend);
-  localStorage.setItem(FINISHED, strArrFin);
+  const wroteAnswer = parseInt(urAnswer);
+  (wroteAnswer === answer) ? resultLine.innerText = `You won!` : resultLine.innerText = `You lost!`
+  resultLine.classList.add("showing");
 }
 
-function deleteHandler(event) {
-  const clickedBtn = event.target;
-  const idOfClickedBtn = parseInt(clickedBtn.id); //1~
-  const clickedLi = document.querySelector(`li[id="${idOfClickedBtn}"]`); 
-  const clickedList = clickedLi.parentNode;
-  
-  if(clickedList.id === 'listPend') {
-    const index = arrPend.findIndex(e => e.id === idOfClickedBtn); // 0~
-    listPend.removeChild(clickedLi);
-    arrPend.splice(index, 1);
-    
+function getRealAnswer(min, max) {
+  answer = Math.floor(Math.random() * (max - min)) - min;
+}
+
+function currentSituation() {
+  if(inputNum.value === '') {
+    return;
+  }
+  const currentAnswer = inputNum.value;
+  wroteSpan.innerText = currentAnswer;
+  machineSpan.innerText = answer;
+  nowLine.classList.add("showing");
+
+  checkCorrect(currentAnswer);
+  getRange();
+}
+
+function getRange() {
+  const range = inputRange.value;
+  const divided = Math.floor(range / 10);
+  const rest = range % 10;
+  let max;
+  const min = 0;
+
+  if(rest > 5){
+    max = (divided + 1) * 10;
   }
   else {
-    const index = arrFin.findIndex(e => e.id === idOfClickedBtn); // 0~
-    listFin.removeChild(clickedLi);
-    arrFin.splice(index, 1);
+    max = (divided * 10) + 5;
   }
-
-lsSetItem();
+  span.innerText = max;
+  getRealAnswer(min, max);
   
-}
-
-
-function moveTo(event) {
-  const movedBtn = event.target;
-  const idOfBtn = parseInt(movedBtn.id); //1~
-  const movedLi = movedBtn.parentNode;
-  const fromList = movedLi.parentNode;
-
-
-  if(fromList.id === 'listPend') {
-    listPend.removeChild(movedLi);
-    listFin.appendChild(movedLi);
-
-    movedBtn.value = '<';
-    const index = arrPend.findIndex(e => e.id === idOfBtn);
-    const movedObj = arrPend[index];
-
-    arrFin.push(movedObj);
-    arrPend.splice(index, 1);
-
-  }
-  else {
-    listFin.removeChild(movedLi);
-    listPend.appendChild(movedLi);
-
-    movedBtn.value = '>';
-    const index = arrFin.findIndex(e => e.id === idOfBtn);
-    const movedObj = arrFin[index];
-    
-    arrPend.push(movedObj);
-    arrFin.splice(index, 1);
-  }
-
-  lsSetItem();
-}
-
-function paintList(text, list) {
-
-  const li = document.createElement("li");
-  const delBtn = document.createElement("input");
-  const btnToMove = document.createElement("input");
-  li.innerText = text;
-  li.id = arrPend.length;
-  delBtn.type = "button"; 
-  delBtn.value = "X";
-  delBtn.id = li.id;
-  btnToMove.type = "button";
-  btnToMove.value = ">";
-  btnToMove.id = li.id;
-
-  list.appendChild(li);
-  li.appendChild(delBtn);
-  li.appendChild(btnToMove);
-  
-  delBtn.addEventListener("click", deleteHandler);
-  btnToMove.addEventListener("click", moveTo);
-}
-
-
-function submitHandler(event) {
-  event.preventDefault();
-  const newText = input.value;
-    //객체 생성
-  const newId = arrPend.length + 1;
-  const newTask = {
-    "id": newId,
-    "text": newText
-  };
-  //생성된 객체 배열에 넣기
-  arrPend.push(newTask);
-  lsSetItem();
-  paintList(newText, listPend);
-  input.value = ''; //clear input
-}
-
-
-function getArray() {
-  const existPend = localStorage.getItem(PENDING);
-  const existFin = localStorage.getItem(FINISHED);
-
-  if(JSON.parse(existPend) !== null){
-    arrPend = JSON.parse(existPend);
-    arrPend.forEach(function(e) {
-      paintList(e.text, listPend);
-    });
-  }
-  if(JSON.parse(existFin) !== null) {
-    arrFin = JSON.parse(existFin);
-    arrFin.forEach(function(element) {
-      paintList(element.text, listFin);
-    });
-  }
+  playBtn.addEventListener("click", currentSituation);
 }
 
 function init() {
-  getArray();
-  lsSetItem();
-  formPend.addEventListener("submit", submitHandler);
+  inputRange.addEventListener("input", getRange);
 }
 
 init();
+
+// const formPend = document.querySelector("#formPend");
+// const formFin = document.querySelector("#formFin");
+// const input = formPend.querySelector("input");
+// const listPend = formPend.querySelector("#listPend");
+// const listFin = formFin.querySelector("#listFin");
+// let arrPend = [];
+// let arrFin = [];
+
+// const PENDING = "Pending";
+// const FINISHED = "Finished";
+
+
+// function lsSetItem() {
+
+//   const strArrPend = JSON.stringify(arrPend);
+//   const strArrFin = JSON.stringify(arrFin);
+//   //배열로 setItem
+//   localStorage.setItem(PENDING, strArrPend);
+//   localStorage.setItem(FINISHED, strArrFin);
+// }
+
+// function deleteHandler(event) {
+//   const clickedBtn = event.target;
+//   const idOfClickedBtn = parseInt(clickedBtn.id); //1~
+//   const clickedLi = document.querySelector(`li[id="${idOfClickedBtn}"]`); 
+//   const clickedList = clickedLi.parentNode;
+  
+//   if(clickedList.id === 'listPend') {
+//     const index = arrPend.findIndex(e => e.id === idOfClickedBtn); // 0~
+//     listPend.removeChild(clickedLi);
+//     arrPend.splice(index, 1);
+    
+//   }
+//   else {
+//     const index = arrFin.findIndex(e => e.id === idOfClickedBtn); // 0~
+//     listFin.removeChild(clickedLi);
+//     arrFin.splice(index, 1);
+//   }
+
+// lsSetItem();
+  
+// }
+
+
+// function moveTo(event) {
+//   const movedBtn = event.target;
+//   const idOfBtn = parseInt(movedBtn.id); //1~
+//   const movedLi = movedBtn.parentNode;
+//   const fromList = movedLi.parentNode;
+
+
+//   if(fromList.id === 'listPend') {
+//     listPend.removeChild(movedLi);
+//     listFin.appendChild(movedLi);
+
+//     movedBtn.value = '<';
+//     const index = arrPend.findIndex(e => e.id === idOfBtn);
+//     const movedObj = arrPend[index];
+
+//     arrFin.push(movedObj);
+//     arrPend.splice(index, 1);
+
+//   }
+//   else {
+//     listFin.removeChild(movedLi);
+//     listPend.appendChild(movedLi);
+
+//     movedBtn.value = '>';
+//     const index = arrFin.findIndex(e => e.id === idOfBtn);
+//     const movedObj = arrFin[index];
+    
+//     arrPend.push(movedObj);
+//     arrFin.splice(index, 1);
+//   }
+
+//   lsSetItem();
+// }
+
+// function paintList(text, list) {
+
+//   const li = document.createElement("li");
+//   const delBtn = document.createElement("input");
+//   const btnToMove = document.createElement("input");
+//   li.innerText = text;
+//   li.id = arrPend.length;
+//   delBtn.type = "button"; 
+//   delBtn.value = "X";
+//   delBtn.id = li.id;
+//   btnToMove.type = "button";
+//   btnToMove.value = ">";
+//   btnToMove.id = li.id;
+
+//   list.appendChild(li);
+//   li.appendChild(delBtn);
+//   li.appendChild(btnToMove);
+  
+//   delBtn.addEventListener("click", deleteHandler);
+//   btnToMove.addEventListener("click", moveTo);
+// }
+
+
+// function submitHandler(event) {
+//   event.preventDefault();
+//   const newText = input.value;
+//     //객체 생성
+//   const newId = arrPend.length + 1;
+//   const newTask = {
+//     "id": newId,
+//     "text": newText
+//   };
+//   //생성된 객체 배열에 넣기
+//   arrPend.push(newTask);
+//   lsSetItem();
+//   paintList(newText, listPend);
+//   input.value = ''; //clear input
+// }
+
+
+// function getArray() {
+//   const existPend = localStorage.getItem(PENDING);
+//   const existFin = localStorage.getItem(FINISHED);
+
+//   if(JSON.parse(existPend) !== null){
+//     arrPend = JSON.parse(existPend);
+//     arrPend.forEach(function(e) {
+//       paintList(e.text, listPend);
+//     });
+//   }
+//   if(JSON.parse(existFin) !== null) {
+//     arrFin = JSON.parse(existFin);
+//     arrFin.forEach(function(element) {
+//       paintList(element.text, listFin);
+//     });
+//   }
+// }
+
+// function init() {
+//   getArray();
+//   lsSetItem();
+//   formPend.addEventListener("submit", submitHandler);
+// }
+
+// init();
 
 
 
