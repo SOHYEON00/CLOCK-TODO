@@ -1,11 +1,85 @@
-p {
+body {
+  display: grid;
+  background-color: black;
+  justify-items: center;
+  padding-top: 30vh;
+
+}
+
+main {
+  display: grid;
+  grid-template-columns: 25vw 9vw;
+  grid-column-gap: 1vh;
+}
+
+.showNum {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-column-gap: 1vh;
+  grid-row-gap: 1vh;
+}
+
+input,
+div{
+  display: grid;
+  place-items: center;
+  font-size: 30px;
+  color: white;
+  height: 6vh;
+  border-radius: 10px;
+  border: 0;
+  outline: 0;
+}
+
+#window {
+  display: grid;
+  justify-content: right;
+  padding-right: 0.5em;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  height: 6vh;
+}
+
+#num0 {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.css-btn {
+  display: grid;
+  grid-row-gap: 1vh;
+}
+
+.operator {
+  background-color: #f0932b;
+}
+.number {
+  background-color: #383638;
+}
+
+#clear {
+  background-color: #b2bec3;
+}
+
+button:hover {
+
+}
+
+
+
+
+
+
+
+/*범위 안의 랜덤 답 맞추기*/
+/*p {
   display: none;
 }
 
 .showing {
   display: block;
 }
-
+*/
 /*/* || general styles 
 
 html {

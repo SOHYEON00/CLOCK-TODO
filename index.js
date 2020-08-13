@@ -1,65 +1,65 @@
-// const form = document.querySelector("form"),
- const     span = document.querySelector("#range"),
-      inputRange = document.querySelector("#rangeInput"),
-      inputNum = document.querySelector("#numberInput"),
-      playBtn = document.querySelector("#play"),
-      wroteSpan = document.querySelector("#wrote"),
-      machineSpan = document.querySelector("#machine"),
-      nowLine = document.querySelector("#now"),
-      resultLine = document.querySelector("#result");
-let answer;
-// 1. input range값 조절하기 = answer값 얻기
-// 2. 내가 생각한 답 입력하기.
-// 3. 버튼 누르면 현재 입력한 값이랑 answer값 비교해 결과 출력
-// 4. 입력한 값이 없으면 3번이 작동하지 않기.
-function checkCorrect(urAnswer) {
+// // const form = document.querySelector("form"),
+//  const     span = document.querySelector("#range"),
+//       inputRange = document.querySelector("#rangeInput"),
+//       inputNum = document.querySelector("#numberInput"),
+//       playBtn = document.querySelector("#play"),
+//       wroteSpan = document.querySelector("#wrote"),
+//       machineSpan = document.querySelector("#machine"),
+//       nowLine = document.querySelector("#now"),
+//       resultLine = document.querySelector("#result");
+// let answer;
+// // 1. input range값 조절하기 = answer값 얻기
+// // 2. 내가 생각한 답 입력하기.
+// // 3. 버튼 누르면 현재 입력한 값이랑 answer값 비교해 결과 출력
+// // 4. 입력한 값이 없으면 3번이 작동하지 않기.
+// function checkCorrect(urAnswer) {
 
-  const wroteAnswer = parseInt(urAnswer);
-  (wroteAnswer === answer) ? resultLine.innerText = `You won!` : resultLine.innerText = `You lost!`
-  resultLine.classList.add("showing");
-}
+//   const wroteAnswer = parseInt(urAnswer);
+//   (wroteAnswer === answer) ? resultLine.innerText = `You won!` : resultLine.innerText = `You lost!`
+//   resultLine.classList.add("showing");
+// }
 
-function getRealAnswer(min, max) {
-  answer = Math.floor(Math.random() * (max - min)) - min;
-}
+// function getRealAnswer(min, max) {
+//   answer = Math.floor(Math.random() * (max - min)) - min;
+// }
 
-function currentSituation() {
-  if(inputNum.value === '') {
-    return;
-  }
-  const currentAnswer = inputNum.value;
-  wroteSpan.innerText = currentAnswer;
-  machineSpan.innerText = answer;
-  nowLine.classList.add("showing");
+// function currentSituation() {
+//   if(inputNum.value === '') {
+//     return;
+//   }
+//   const currentAnswer = inputNum.value;
+//   wroteSpan.innerText = currentAnswer;
+//   machineSpan.innerText = answer;
+//   nowLine.classList.add("showing");
 
-  checkCorrect(currentAnswer);
-  getRange();
-}
+//   checkCorrect(currentAnswer);
+//   getRange();
+// }
 
-function getRange() {
-  const range = inputRange.value;
-  const divided = Math.floor(range / 10);
-  const rest = range % 10;
-  let max;
-  const min = 0;
+// function getRange() {
+//   const range = inputRange.value;
+//   const divided = Math.floor(range / 10);
+//   const rest = range % 10;
+//   let max;
+//   const min = 0;
 
-  if(rest > 5){
-    max = (divided + 1) * 10;
-  }
-  else {
-    max = (divided * 10) + 5;
-  }
-  span.innerText = max;
-  getRealAnswer(min, max);
+//   if(rest > 5){
+//     max = (divided + 1) * 10;
+//   }
+//   else {
+//     max = (divided * 10) + 5;
+//   }
+//   span.innerText = max;
+//   getRealAnswer(min, max);
   
-  playBtn.addEventListener("click", currentSituation);
-}
+//   playBtn.addEventListener("click", currentSituation);
+// }
 
-function init() {
-  inputRange.addEventListener("input", getRange);
-}
+// function init() {
+//   inputRange.addEventListener("input", getRange);
+// }
 
-init();
+// init();
 
 // const formPend = document.querySelector("#formPend");
 // const formFin = document.querySelector("#formFin");
