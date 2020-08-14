@@ -5,12 +5,10 @@ const container = document.querySelector("container"),
 	resultBtn = document.querySelector("#submit"),
 	clearBtn = document.querySelector("#clear"),
 	operatorBtn = document.querySelector(".operator");
-
 let num1;
 let num2;
 let getOperator;
-let stringedNum = num1; //한 자리 수 이상의 수를 입력받기 위한 변수
-let currentNum;
+let stringedNum; //한 자리 수 이상의 수를 입력받기 위한 변수
 let arrNumber = [];
 
 // 1. 넘버 클릭 이벤트 발생->핸들러
@@ -20,7 +18,6 @@ let arrNumber = [];
 
  function operation() {
  	let total;
-
 	switch(getOperator) {
 		case '+':
 			total = num1 + num2;
@@ -35,26 +32,34 @@ let arrNumber = [];
 			total = num1 / num2;
 			break;
 	}
+
 	screen.innerText = total;
 	num1 = total;
+	num2 = undefined;
 	arrNumber = [];
+	
  }
 
 function getInputOperator(operator) {
 
+
 	if(num1 === undefined) {
-		num1 = parseInt(stringedNum);
+		num1 = parseInt(stringedNum, 10);
 		stringedNum = undefined;
 		arrNumber.push(num1);
 	}
 	else {
-		num2 = parseInt(stringedNum);
+		num2 = parseInt(stringedNum, 10);
+		if(isNaN(num2)) {
+			return;
+		}
 		arrNumber.push(num2);
 		stringedNum = undefined;
+		operation();
+
 	}
 	arrNumber.push(operator);
 	getOperator = operator;
-
 }
 
 function getInputNum(value) {
@@ -72,28 +77,20 @@ function getInputNum(value) {
 
 function submitHandler() {
 	event.preventDefault();
-	
+
 	num2 = parseInt(stringedNum);
 	arrNumber.push(num2);
-	console.log(num1);
-	console.log(getOperator);
-	console.log(num2);
-
-	if(arrNumber.length === 3) {
+	if(num1 !== undefined && num2 !== undefined) {
 		operation();
 	}
-	
+	num2 = undefined;
  }
 
 function resetHandler() {
 	event.preventDefault();
-	console.log(arrNumber);
-	console.log(num1);
-	console.log(getOperator);
+	arrNumber = [];
+	num1 = undefined;
+	num2 = undefined;
+	stringedNum = undefined;
+	screen.innerText = '';
 }
-
-function init() {
-
-}
-
-init();

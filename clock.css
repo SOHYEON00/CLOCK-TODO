@@ -5,7 +5,7 @@ main {
 	height: 100%;
 }
 
-container {
+.showNum {
 	display: flex;
 	width: 50%;
 	flex-direction: column;
