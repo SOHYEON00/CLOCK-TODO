@@ -20,16 +20,23 @@ main {
 }
 
 input,
-div{
+#window,
+button {
   display: grid;
   place-items: center;
   font-size: 30px;
   color: white;
   height: 6vh;
-  border-radius: 10px;
+  border-radius: 12px;
   border: 0;
   outline: 0;
 }
+
+input:active,
+#submit:active {
+  background-color: black;
+}
+
 
 #window {
   display: grid;
@@ -53,16 +60,14 @@ div{
 .operator {
   background-color: #f0932b;
 }
-.number {
+.number,
+#submit,
+.num-form {
   background-color: #383638;
 }
 
-#clear {
-  background-color: #b2bec3;
-}
-
-button:hover {
-
+.clear {
+  background-color: #c8cacf;
 }
 
 
