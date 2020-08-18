@@ -1,3 +1,64 @@
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+}
+
+/*
+font-family: 'Bangers', cursive;
+font-family: 'Roboto Slab', serif;*/
+
+p,
+form {
+	color: white;
+}
+
+.first-showing {
+	display: flex;
+	justify-content: center;
+}
+
+.backImg {
+	position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;	
+	/*opacity: 50%;*/
+}
+
+
+.form-name {
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50vw;
+}
+
+.greeting {
+	font-family: 'Roboto Slab', serif;
+	font-size: 3em;
+}
+
+#greetingInput {
+	background-color: transparent;/* input box 배경을 투명하게 하는 방법*/
+	border: none;
+	border-bottom: 2px solid white;
+}
+
+#greetingInput:focus {
+	outline: none; /*input클릭시 생기는 테두리선 없애기*/
+}
+
 .not-showing {
 	display: none;
+}
+
+.changeFontSize {
+	font-size: 2em;
 }

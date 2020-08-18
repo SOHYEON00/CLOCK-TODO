@@ -1,5 +1,7 @@
-const firstShow =  document.querySelector(".first-showing"),
+const body =  document.querySelector("body"),
+	firstShow =  document.querySelector(".first-showing"),
 	formGreeting = firstShow.querySelector(".form-name"),
+	pGreeting = formGreeting.querySelector("p"),
 	name = formGreeting.querySelector("input"),
 	mainShow = document.querySelector(".main-showing"),
 	clock = mainShow.querySelector("#clock"),
@@ -11,6 +13,22 @@ const firstShow =  document.querySelector(".first-showing"),
 
 const GREET_LS = "name",
 	TODO_LS = "todo";
+const IMG_NUMBER = 8;
+
+
+// ---------------- background img random play ------------
+
+function paintImg(imgNumber) {
+	const image = document.createElement("img");
+	image.src = `img/${imgNumber + 1}.jpg`;
+	image.classList.add("backImg");
+	body.appendChild(image);
+}
+
+function randomImg() {
+	const number = Math.floor(Math.random() * IMG_NUMBER);
+	paintImg(number);
+}
 
 // --------------------- today's focus -----------------------
 
@@ -48,7 +66,7 @@ function submitHandler(event) {
 	newTodo.value = '';
 }
 
-// --------------------- greeting -----------------------
+// --------------------- greeting & todo-----------------------
 function changePage() {
 	const savedName = localStorage.getItem(GREET_LS);
 	const savedTodo = localStorage.getItem(TODO_LS);
@@ -61,6 +79,7 @@ function changePage() {
 	}
 }
 
+// --------------------- greeting -----------------------
 function resetHandler(event) {
 	event.preventDefault();
 	mainShow.classList.add("not-showing");
@@ -82,6 +101,11 @@ function greetingHandler(event) {
 	paintGreeting();
 }
 
+function pClickHandler(event) {
+	event.preventDefault();
+	pGreeting.classList.add("changeFontSize");
+}
+
 // --------------------- clock -----------------------
 function getTime() {
 	const currentTime = new Date(),
@@ -95,12 +119,16 @@ function getTime() {
 
 // --------------------- init -----------------------
 function init() {
+	randomImg();
+
 	window.addEventListener("load", changePage);
 	setInterval(getTime, 1000);
 	formGreeting.addEventListener("submit", greetingHandler);
 	resetBtn.addEventListener("click", resetHandler);
 
 	formTodo.addEventListener("submit", submitHandler);
+
+	pGreeting.addEventListener("click", pClickHandler);
 }
 
 init();
