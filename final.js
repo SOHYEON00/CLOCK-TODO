@@ -7,18 +7,57 @@ const firstShow =  document.querySelector(".first-showing"),
 	resetBtn = mainShow.querySelector("#resetBtn"),
 	formTodo = mainShow.querySelector("#form-todo"),
 	newTodo = formTodo.querySelector("input"),
-	listTodo = formTodo.querySelector("#list");
+	todaysTodo = formTodo.querySelector("#todaysTodo");
 
 const GREET_LS = "name",
 	TODO_LS = "todo";
 
+// --------------------- today's focus -----------------------
+
+function deleteTodo(event) {
+	event.preventDefault();
+	localStorage.removeItem(TODO_LS);
+	paintTodo();
+}
+
+function addButton() {
+	const delBtn = document.createElement("input");
+	delBtn.type = "button";
+	delBtn.value = "X";
+	delBtn.addEventListener("click", deleteTodo);
+
+	todaysTodo.appendChild(delBtn);
+}
+
+function paintTodo() {
+	const todo = localStorage.getItem(TODO_LS);
+	todaysTodo.innerText = todo;	
+
+	if(todo !== null){
+		addButton();
+	}
+}
+
+function submitHandler(event) {
+	event.preventDefault();
+
+	const currentTodo = newTodo.value;
+	localStorage.setItem(TODO_LS, currentTodo);
+	paintTodo();
+
+	newTodo.value = '';
+}
+
+// --------------------- greeting -----------------------
 function changePage() {
 	const savedName = localStorage.getItem(GREET_LS);
+	const savedTodo = localStorage.getItem(TODO_LS);
 
 	if(savedName !== null) {
 		firstShow.classList.add("not-showing");
 		mainShow.classList.remove("not-showing");
 		paintGreeting();
+		paintTodo();
 	}
 }
 
@@ -37,13 +76,13 @@ function paintGreeting() {
 function greetingHandler(event) {
 	event.preventDefault();
 
-	changePage();
-
 	const newName = name.value;
 	localStorage.setItem(GREET_LS, newName);
+	changePage();
 	paintGreeting();
 }
 
+// --------------------- clock -----------------------
 function getTime() {
 	const currentTime = new Date(),
 		hour = currentTime.getHours(),
@@ -54,11 +93,14 @@ function getTime() {
 	clock.innerText = `${sumHour} : ${sumMins}`;
 }
 
+// --------------------- init -----------------------
 function init() {
 	window.addEventListener("load", changePage);
 	setInterval(getTime, 1000);
 	formGreeting.addEventListener("submit", greetingHandler);
 	resetBtn.addEventListener("click", resetHandler);
+
+	formTodo.addEventListener("submit", submitHandler);
 }
 
 init();
