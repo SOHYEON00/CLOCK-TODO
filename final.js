@@ -61,6 +61,11 @@ function submitHandler(event) {
 	event.preventDefault();
 
 	const currentTodo = newTodo.value;
+	if(currentTodo === '') {
+		alert("plz typing again");
+		return;
+	}
+	
 	localStorage.setItem(TODO_LS, currentTodo);
 	paintTodo();
 
