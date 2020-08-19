@@ -1,22 +1,22 @@
 body {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	justify-content: center;
 	position: absolute;
 	height: 100%;
 	width: 100%;
 }
 
-/*
-font-family: 'Bangers', cursive;
-font-family: 'Roboto Slab', serif;*/
-
 p,
-form {
+form,
+input,
+input::placeholder {
 	color: white;
+	font-size: 1em;
 }
 
-.first-showing {
+.first-showing,
+.main-showing {
 	display: flex;
 	justify-content: center;
 }
@@ -31,8 +31,9 @@ form {
 	/*opacity: 50%;*/
 }
 
-
-.form-name {
+.form-name,
+.main-showing,
+#form-todo {
 	display: flex;
     flex-direction: column;
     justify-content: center;
@@ -45,20 +46,41 @@ form {
 	font-size: 3em;
 }
 
-#greetingInput {
+#greetingInput,
+#todoInput {
 	background-color: transparent;/* input box 배경을 투명하게 하는 방법*/
 	border: none;
 	border-bottom: 2px solid white;
+	text-align: center;
 }
 
-#greetingInput:focus {
+#greetingInput:focus,
+#todoInput:focus {
 	outline: none; /*input클릭시 생기는 테두리선 없애기*/
 }
 
+#clock {
+	margin-bottom: 0px;
+    font-family: 'Bangers', cursive;
+    font-size: 7em;
+}
+
+#todoInput {
+	width: 20vw;
+}
+
+.js-greeting {
+	font-size: 4em;
+	font-family: 'Roboto Slab', serif;
+	margin-top: 0px;
+}
 .not-showing {
 	display: none;
 }
 
-.changeFontSize {
-	font-size: 2em;
+.delBtn {
+	background-color: transparent;
+	border: none;
+	text-align: center;
+	color: white;
 }

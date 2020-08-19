@@ -42,6 +42,7 @@ function addButton() {
 	const delBtn = document.createElement("input");
 	delBtn.type = "button";
 	delBtn.value = "X";
+	delBtn.classList.add("delBtn");
 	delBtn.addEventListener("click", deleteTodo);
 
 	todaysTodo.appendChild(delBtn);
@@ -101,11 +102,6 @@ function greetingHandler(event) {
 	paintGreeting();
 }
 
-function pClickHandler(event) {
-	event.preventDefault();
-	pGreeting.classList.add("changeFontSize");
-}
-
 // --------------------- clock -----------------------
 function getTime() {
 	const currentTime = new Date(),
@@ -124,11 +120,9 @@ function init() {
 	window.addEventListener("load", changePage);
 	setInterval(getTime, 1000);
 	formGreeting.addEventListener("submit", greetingHandler);
-	resetBtn.addEventListener("click", resetHandler);
+	greeting.addEventListener("click", resetHandler);
 
 	formTodo.addEventListener("submit", submitHandler);
-
-	pGreeting.addEventListener("click", pClickHandler);
 }
 
 init();
